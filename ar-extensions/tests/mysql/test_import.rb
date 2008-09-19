@@ -22,6 +22,11 @@ class MysqlImportTest < Test::Unit::TestCase
     Topic.find_by_id( 1 )
   end
  
+  def test_import_with_zero_records
+    columns = %W{ id author_name }
+    assert_equal 0, Topic.import(columns, [])
+  end
+ 
   def test_import_without_validations_but_with_on_duplicate_key_update_that_synchronizes_existing_AR_instances
     topics = []
     topics << Topic.create!( :title=>"LDAP", :author_name=>"Big Bird" )

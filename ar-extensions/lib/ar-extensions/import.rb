@@ -253,6 +253,8 @@ class ActiveRecord::Base
     # information on +column_names+, +array_of_attributes_ and
     # +options+.
     def import_without_validations_or_callbacks( column_names, array_of_attributes, options={} )
+      return 0 if array_of_attributes.empty?
+      
       escaped_column_names = quote_column_names( column_names )
       columns = []
       array_of_attributes.first.each_with_index { |arr,i| columns << columns_hash[ column_names[i] ] }
